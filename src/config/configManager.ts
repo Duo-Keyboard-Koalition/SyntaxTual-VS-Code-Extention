@@ -19,6 +19,10 @@ export class ConfigManager {
         return this.config.get<string>('openaiApiKey', '');
     }
 
+    get customEndpoint(): string {
+        return this.config.get<string>('customEndpoint', '');
+    }
+
     get model(): string {
         return this.config.get<string>('model', 'gpt-4-turbo-preview');
     }

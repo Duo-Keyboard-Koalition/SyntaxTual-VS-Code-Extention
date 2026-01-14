@@ -81,31 +81,32 @@
         "syntaxtual.openaiApiKey": {
           "type": "string",
           "default": "",
-          "description": "OpenAI API Key for code analysis",
+          "description": "API Key for AI service",
           "order": 1
+        },
+        "syntaxtual.customEndpoint": {
+          "type": "string",
+          "default": "",
+          "description": "Custom API endpoint (leave empty for OpenAI). Example: http://localhost:1234/v1",
+          "order": 2
         },
         "syntaxtual.model": {
           "type": "string",
           "default": "gpt-4-turbo-preview",
-          "enum": [
-            "gpt-4-turbo-preview",
-            "gpt-4",
-            "gpt-3.5-turbo"
-          ],
-          "description": "OpenAI model to use for analysis",
-          "order": 2
+          "description": "Model name to use for analysis (e.g., gpt-4-turbo-preview, llama-3, claude-3-opus)",
+          "order": 3
         },
         "syntaxtual.autoAnalyze": {
           "type": "boolean",
           "default": false,
           "description": "Automatically analyze files on save",
-          "order": 3
+          "order": 4
         },
         "syntaxtual.customRules": {
           "type": "array",
           "default": [],
           "description": "Custom review rules (array of rule objects)",
-          "order": 4
+          "order": 5
         },
         "syntaxtual.excludePatterns": {
           "type": "array",
@@ -117,7 +118,7 @@
             "**/*.min.js"
           ],
           "description": "Glob patterns for files to exclude from analysis",
-          "order": 5
+          "order": 6
         },
         "syntaxtual.severityThreshold": {
           "type": "string",
@@ -128,13 +129,13 @@
             "info"
           ],
           "description": "Minimum severity level to display",
-          "order": 6
+          "order": 7
         },
         "syntaxtual.maxFilesToAnalyze": {
           "type": "number",
           "default": 50,
           "description": "Maximum number of files to analyze in repository scan",
-          "order": 7
+          "order": 8
         }
       }
     },

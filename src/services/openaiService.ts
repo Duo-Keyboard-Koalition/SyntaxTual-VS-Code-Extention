@@ -35,8 +35,17 @@ export class OpenAIService {
 
     private initializeClient(): void {
         const apiKey = this.configManager.openaiApiKey;
+        const customEndpoint = this.configManager.customEndpoint;
+        
         if (apiKey) {
-            this.client = new OpenAI({ apiKey });
+            const config: any = { apiKey };
+            
+            // Use custom endpoint if provided
+            if (customEndpoint) {
+                config.baseURL = customEndpoint;
+            }
+            
+            this.client = new OpenAI(config);
         }
     }
 

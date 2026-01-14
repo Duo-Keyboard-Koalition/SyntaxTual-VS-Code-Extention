@@ -13,6 +13,7 @@ export interface ReviewRule {
 
 export interface SyntaxtualConfig {
     openaiApiKey: string;
+    customEndpoint: string;
     model: string;
     autoAnalyze: boolean;
     customRules: ReviewRule[];
