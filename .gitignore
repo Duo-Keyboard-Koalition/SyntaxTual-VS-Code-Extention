@@ -4,10 +4,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+
+# VS Code extension build
+dist/
 
 # testing
 /coverage

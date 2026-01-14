@@ -1,18 +1,197 @@
 {
-  "name": "discord-auth",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "syntaxtual",
+  "displayName": "Syntaxtual",
+  "description": "AI-powered repository-level code analysis with conversational reviews",
+  "version": "0.1.0",
+  "publisher": "syntaxtual",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "code review",
+    "openai",
+    "gpt",
+    "code analysis"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "syntaxtual-sidebar",
+          "title": "Syntaxtual",
+          "icon": "resources/icons/syntaxtual.svg"
+        }
+      ]
+    },
+    "views": {
+      "syntaxtual-sidebar": [
+        {
+          "type": "webview",
+          "id": "syntaxtual.chatView",
+          "name": "Code Review"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "syntaxtual.analyzeRepository",
+        "title": "Syntaxtual: Analyze Repository"
+      },
+      {
+        "command": "syntaxtual.reviewFile",
+        "title": "Syntaxtual: Review Current File"
+      },
+      {
+        "command": "syntaxtual.startConversation",
+        "title": "Syntaxtual: Discuss This Issue"
+      },
+      {
+        "command": "syntaxtual.applyFix",
+        "title": "Syntaxtual: Apply Suggested Fix"
+      },
+      {
+        "command": "syntaxtual.openSettings",
+        "title": "Syntaxtual: Open Settings"
+      },
+      {
+        "command": "syntaxtual.loginDiscord",
+        "title": "Syntaxtual: Login with Discord"
+      },
+      {
+        "command": "syntaxtual.logout",
+        "title": "Syntaxtual: Logout"
+      },
+      {
+        "command": "syntaxtual.clearAnalysis",
+        "title": "Syntaxtual: Clear Analysis"
+      }
+    ],
+    "configuration": {
+      "title": "Syntaxtual",
+      "properties": {
+        "syntaxtual.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key for code analysis",
+          "order": 1
+        },
+        "syntaxtual.model": {
+          "type": "string",
+          "default": "gpt-4-turbo-preview",
+          "enum": [
+            "gpt-4-turbo-preview",
+            "gpt-4",
+            "gpt-3.5-turbo"
+          ],
+          "description": "OpenAI model to use for analysis",
+          "order": 2
+        },
+        "syntaxtual.autoAnalyze": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically analyze files on save",
+          "order": 3
+        },
+        "syntaxtual.customRules": {
+          "type": "array",
+          "default": [],
+          "description": "Custom review rules (array of rule objects)",
+          "order": 4
+        },
+        "syntaxtual.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/.git/**",
+            "**/build/**",
+            "**/*.min.js"
+          ],
+          "description": "Glob patterns for files to exclude from analysis",
+          "order": 5
+        },
+        "syntaxtual.severityThreshold": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ],
+          "description": "Minimum severity level to display",
+          "order": 6
+        },
+        "syntaxtual.maxFilesToAnalyze": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of files to analyze in repository scan",
+          "order": 7
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "syntaxtual.reviewFile",
+          "group": "syntaxtual@1"
+        },
+        {
+          "command": "syntaxtual.startConversation",
+          "group": "syntaxtual@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "syntaxtual.analyzeRepository"
+        },
+        {
+          "command": "syntaxtual.reviewFile"
+        },
+        {
+          "command": "syntaxtual.openSettings"
+        },
+        {
+          "command": "syntaxtual.loginDiscord"
+        },
+        {
+          "command": "syntaxtual.logout"
+        },
+        {
+          "command": "syntaxtual.clearAnalysis"
+        }
+      ]
+    }
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "vscode:prepublish": "npm run build",
+    "build": "npm run build:extension && npm run build:webview",
+    "build:extension": "node esbuild.config.js --production",
+    "build:webview": "cd webview && npm run build",
+    "watch": "node esbuild.config.js --watch",
+    "watch:webview": "cd webview && npm run dev",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "vite": "^6.0.5"
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.55.0",
+    "typescript": "^5.3.2"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "react-router-dom": "^7.1.1"
+    "openai": "^4.20.0"
   }
 }
