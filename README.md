@@ -45,29 +45,63 @@ AI-powered repository-level code analysis with conversational reviews. Get intel
 
 ## Running the Extension
 
-### Method 1: Debug Mode (Recommended for Development)
+### Method 1: Quick Start (Press F5)
 
-1. **Open the project in VS Code**
+**Fastest way** - If VS Code is already open with the project:
+
+1. Simply press **F5**
+2. The watch task will start automatically
+3. A new Extension Development Host window opens with your extension loaded
+
+### Method 2: Using Command Palette
+
+1. Press **Ctrl+Shift+P**
+2. Type **"Debug: Start Debugging"**
+3. Select **"Run Extension"**
+
+### Method 3: Run and Debug Panel
+
+1. Press **Ctrl+Shift+D** to open Run and Debug panel
+2. Click the green **▶ Run Extension** button
+3. Extension Development Host window launches
+
+### Method 4: From Terminal (Manual Build)
+
+If you want to build first, then run:
+
+```bash
+# Build the extension
+npm run build
+
+# Then press F5 or use one of the methods above
+```
+
+### Method 5: Watch Mode (Best for Active Development)
+
+For continuous development with auto-rebuild:
+
+```bash
+# Start watch mode in terminal
+npm run watch
+
+# Then press F5 to launch the extension
+# Make code changes - they auto-rebuild
+# Press Ctrl+R in the Extension Development Host to reload
+```
+
+### Method 6: Build and Install as VSIX (Production Testing)
+
+1. **Package the extension**
    ```bash
-   code .
+   npm install -g @vscode/vsce
+   vsce package
    ```
 
-2. **Press F5** or go to **Run and Debug** (Ctrl+Shift+D) and click **"Run Extension"**
-
-3. A new VS Code window will open with the extension loaded
-
-### Method 2: Build and Install Locally
-
-1. **Build the extension package**
-   ```bash
-   npm run build
-   ```
-
-2. **Install in VS Code**
+2. **Install the .vsix file**
    - Open VS Code
    - Go to Extensions (Ctrl+Shift+X)
    - Click the `...` menu → "Install from VSIX..."
-   - Select the generated `.vsix` file (if packaged)
+   - Select the generated `.vsix` file
 
 ## Configuration
 
