@@ -37,8 +37,11 @@ RUN mkdir -p /etc/apt/keyrings \
     && apt-get install -y --no-install-recommends antigravity \
     && rm -rf /var/lib/apt/lists/*
 
-# --- Cursor: official AppImage, extracted at build time (no FUSE needed) ---
-RUN curl -fsSL "https://downloader.cursor.sh/linux/appImage/x64" -o /tmp/cursor.AppImage \
+# --- Cursor: resolve the latest AppImage via the download API, extract it (no FUSE) ---
+RUN CURSOR_URL="$(curl -fsSL 'https://www.cursor.com/api/download?platform=linux-x64&releaseTrack=stable' \
+        | grep -oP '\"downloadUrl\"\s*:\s*\"\K[^\"]+')" \
+    && echo "Cursor download URL: $CURSOR_URL" \
+    && curl -fsSL "$CURSOR_URL" -o /tmp/cursor.AppImage \
     && chmod +x /tmp/cursor.AppImage \
     && cd /opt && /tmp/cursor.AppImage --appimage-extract \
     && mv /opt/squashfs-root /opt/cursor \
