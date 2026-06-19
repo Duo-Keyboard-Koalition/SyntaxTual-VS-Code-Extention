@@ -7,8 +7,6 @@ services:
     container_name: claude-code-server
     ports:
       - "8080:8080"
-    # Chromium/Electron (Cursor) crashes with Docker's default 64MB /dev/shm
-    shm_size: "1gb"
     environment:
       # OPTIONAL: skip the interactive login by providing an API key instead.
       # Leave blank to authenticate with your Anthropic account via `claude`.
@@ -18,7 +16,7 @@ services:
       - ./workspace:/home/user/project
       # Claude account login / config, persisted so you only log in once
       - claude-config:/home/user/.claude
-      # Cursor & code-server settings, persisted across restarts
+      # VS Code settings/extensions, persisted across restarts
       - user-config:/home/user/.config
     restart: unless-stopped
 

@@ -1,11 +1,10 @@
 
 ============================================================
-  Claude Code + VS Code / Cursor / Antigravity (browser)
+  Claude Code + VS Code (browser)
 ============================================================
-  You are the non-root user 'user' (sudo, no password).
+  You are the non-root user 'user' (sudo/admin, no password).
 
-  Open http://localhost:8080 and pick VS Code, Cursor,
-  or Antigravity.
+  VS Code is at http://localhost:8080
 
   FIRST-RUN SETUP — authenticate Claude with your account:
 
@@ -13,4 +12,10 @@
 
   Follow the login link it prints to sign in to your Anthropic
   account. Done once; saved in ~/.claude and persisted.
+
+  Danger mode (skips permission prompts):
+
+      claude-danger        # = claude --dangerously-skip-permissions
+
+  Works because this container runs as non-root 'user'.
 ============================================================
