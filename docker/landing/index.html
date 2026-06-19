@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Choose your IDE</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1f2937, #0b0f17 70%);
+      color: #e5e7eb;
+    }
+    h1 { font-weight: 600; margin: 0 0 6px; }
+    p.sub { margin: 0 0 36px; color: #9ca3af; }
+    .cards { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    a.card {
+      width: 240px; padding: 32px 26px;
+      background: #111827; border: 1px solid #1f2937; border-radius: 16px;
+      text-decoration: none; color: inherit;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    a.card:hover { transform: translateY(-4px); border-color: #3b82f6; background: #0f1726; }
+    .icon { font-size: 40px; }
+    .name { font-size: 20px; font-weight: 600; }
+    .desc { font-size: 13px; color: #9ca3af; line-height: 1.4; }
+    footer { margin-top: 40px; font-size: 12px; color: #6b7280; text-align: center; max-width: 560px; }
+    code { background:#1f2937; padding:1px 6px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <h1>Which IDE do you want to open?</h1>
+  <p class="sub">All run inside this container as the <code>user</code> account.</p>
+
+  <div class="cards">
+    <a class="card" href="/code/">
+      <div class="icon">🟦</div>
+      <div class="name">VS Code</div>
+      <div class="desc">Full VS Code in the browser (code-server). Claude Code in the terminal.</div>
+    </a>
+
+    <a class="card" href="/cursor/vnc.html?autoconnect=1&resize=remote&reconnect=1&path=cursor/websockify">
+      <div class="icon">🟨</div>
+      <div class="name">Cursor</div>
+      <div class="desc">The real Cursor desktop app, streamed to your browser via noVNC.</div>
+    </a>
+
+    <a class="card" href="/antigravity/vnc.html?autoconnect=1&resize=remote&reconnect=1&path=antigravity/websockify">
+      <div class="icon">🟪</div>
+      <div class="name">Antigravity</div>
+      <div class="desc">Google's Antigravity IDE desktop app, streamed via noVNC.</div>
+    </a>
+  </div>
+
+  <footer>
+    First time? Open a terminal in any IDE and run <code>claude</code> once to sign in to your Anthropic account.
+  </footer>
+</body>
+</html>
